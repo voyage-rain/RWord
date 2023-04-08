@@ -13,9 +13,8 @@ public interface UserService {
     User login(String username, String password);
 
     /**
-     * 用户注册功能
-     * @param username 新用户名
-     * @param password 新用户密码
+     *用户注册功能
+     * @param user 注册的新用户
      */
-    //void sign(String username, String password);
+    void register(User user);
 }

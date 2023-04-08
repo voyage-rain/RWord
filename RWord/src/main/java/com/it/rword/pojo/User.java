@@ -17,6 +17,11 @@ public class User extends BasePojo{
 
     private String salt;
 
+    /**
+     * status:
+     *      为0 代表该用户存在
+     *      为1 代表该用户被删除了
+     */
     private Integer status;
 
 }
