@@ -1,5 +1,5 @@
-
-
+server:
+  port: 80
 spring:
   datasource:
     druid:
@@ -7,4 +7,3 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: abc123
-

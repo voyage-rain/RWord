@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RWord Login</title>
+  <title>RWord Register</title>
   <style>
     body {
+    
         background-image: url("../img/login.png");
         background-repeat: no-repeat;
         background-size: 100%;
     }
 
-    #login_box {
+    #register_box {
       width: 20%;
       height: 20%;
       background-color: #44658960;
@@ -28,11 +29,11 @@
       margin-top: 2%;
     }
 
-    #input-box {
+    .input-box1 {
       margin-top: 5%;
     }
 
-    #input_box,.input_box{
+    .input_box1,.input_box2{
         color: #ffffffc3;
     }
 
@@ -49,7 +50,6 @@
       padding: 5px 10px;
       margin-top: 10px;
       outline: none;
-
     }
     input:hover{
         border-radius: 8px;
@@ -68,21 +68,19 @@
       font-size: 15px;
       background-image: linear-gradient(to right, #30cfd0, #330867);
     }
-
-
   </style>
 </head>
 
 <body>
-  <div id="login_box">
-    <h2>LOGIN</h2>
-    <div id="input_box">
-      账号：<input type="text" id="username" placeholder="请输入用户名">
+  <div id="register_box">
+    <h2>Register</h2>
+    <div class="input_box1">
+      账号：<input type="text" id="username" placeholder="请设置用户名">
     </div>
-    <div class="input_box">
-      密码：<input type="password" id="password" placeholder="请输入密码">
+    <div class="input_box2">
+      密码：<input type="password" id="password" placeholder="请设置密码">
     </div>
-    <button id="login_btn">登录</button><br>
+    <button id="reg_btn">注册</button><br>
   </div>
 </body>
 
@@ -91,23 +89,21 @@
   var xhr = new XMLHttpRequest();
 
   window.onload = function () {
-    document.getElementById("login_btn").onclick = function () {
+    document.getElementById("reg_btn").onclick = function () {
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            // 接收到后端返回的json格式的字符串
             var fromJavaServerJsonStr = this.responseText;
-            // 将json格式的字符串转换为JSON数据
             var jsonObj = JSON.parse(fromJavaServerJsonStr);
             if (jsonObj.state === 200) {
-              window.location.href = "/web/index.html";
+              window.location.href = "/web/login.html";
             }else {
-              alert("登陆失败");
+              alert("注册失败");
             }
           }
         }
       }
-      xhr.open("POST", "/users/login", true);
+      xhr.open("POST", "/users/register", true);
 
       // 设置请求头的请求类型，模拟表单数据提交
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

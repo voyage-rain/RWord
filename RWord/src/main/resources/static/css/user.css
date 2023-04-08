@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+ }
+body {
+    background: linear-gradient(to right, rgb(209, 247, 224), rgb(191, 227, 241));
+}
+a {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+
+.head {
+    height:40px;
+    background: linear-gradient(to right, rgba(148, 249, 189, 0.37), rgba(156, 222, 248, 0.397));
+}
+.headleft {
+    float: left;
+    font-family: 'STZhongsong';
+    font-weight: bolder;
+    font-size: 20px;
+    padding-left: 30px;
+    line-height: 40px;
+    color: rgba(31, 2, 126, 0.582);
+}
+.headright {
+    float: right;
+    height: 40px;
+    padding-right: 30px;
+}
+.headright ul li {
+    float: left;
+    padding: 0 30px;
+ }
+.headright ul li a {
+    display: block;
+    font-size: 15px;
+    font-family: 'YouYuan';
+    font-weight: bolder;
+    height: 40px;
+    padding: 0 10px;
+    color: rgba(4, 8, 130, 0.726);
+    line-height: 40px;
+}
+.headright ul li a:hover {
+    border-bottom: 2px solid rgba(50, 210, 231, 0.671);
+    color:rgba(50, 210, 231, 0.671)
+}
+.box {
+    margin:auto;
+    display: flex;
+    margin-top: 80px;
+    height: 350px;
+    width: 600px;
+    border-radius: 20px;
+    text-align: center;
+    flex-wrap: nowrap;
+    background: linear-gradient(to right, rgba(101, 252, 162, 0.37), rgba(106, 211, 253, 0.397));
+}
+
+.box .outbox , .box .inbox{
+    height: 100%;
+    width: 300px;
+    display: flex;
+    /* 纵向布局 */
+    flex-direction: column;
+    /* 水平居中 */
+    align-items: center;
+}
+
+/* .box .outbox{
+
+    background-color: #666;
+} */
+.box .outbox .img_box{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-top: 50px;
+    /* background-color: #777; */
+    overflow: hidden;
+}
+
+.box .outbox .img_box img{
+    width: 100%;
+
+}
+
+.box .outbox .button1{
+    margin-top: 40px;
+    background-color: rgba(50, 210, 231, 0);
+    border: none;
+
+}
+
+.box .outbox .button1 a{
+    font-size: 15px;
+    font-weight: bolder;
+    font-family: 'STKaiti';
+    color: rgba(2, 2, 2, 0.909);
+}
+
+.box .outbox .button1 a:hover{
+    border: 2px solid rgba(50, 210, 231, 0.671);
+    border-radius: 8px;
+    color: rgba(50, 210, 231, 0.671)
+}
+
+/* .box .inbox{
+    background-color: pink;
+} */
+
+.box .inbox ul{
+    margin: auto;
+    margin-left: 50px;
+}
+
+.box .inbox ul li{
+    color: rgba(16, 13, 13, 0.742);
+    margin-top: 20px;
+}
+.box .m {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+.revise {
+    margin-top: 20px;
+    margin-left: 46.33%;
+}
+.revise button{
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #3bc0f99f;
+    color: white;
+    border: none;
+}
+.revise button a {
+    color: rgba(255, 255, 255, 0.758);  
+}
+.revise button a:hover {
+    color: rgba(20, 44, 122, 0.671)
+}
