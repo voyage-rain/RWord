@@ -3,12 +3,14 @@ package com.it.rword.service.impl;
 import com.it.rword.mapper.UserMapper;
 import com.it.rword.pojo.User;
 import com.it.rword.service.UserService;
+import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.UUID;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Resource
@@ -57,12 +59,14 @@ public class UserServiceImpl implements UserService {
         user.setModifyTime(null);
 
 
-        // 将该用户添加到数据库中
-//        Integer rows = userMapper.insert(user);
-//        if(rows != 1) {
-//            System.out.println("添加异常");
-//        }
+//         将该用户添加到数据库中
+        Integer rows = userMapper.insert(user);
+        if(rows != 1) {
+            System.out.println("添加异常");
+            return;
+        }
 
+        System.out.println("添加成功！");
     }
 
     /**
