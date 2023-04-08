@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RWord Login</title>
+  <style>
+    body {
+        background-image: url("../img/login.png");
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+
+    #login_box {
+      width: 20%;
+      height: 20%;
+      background-color: #44658960;
+      margin: auto;
+      margin-top: 10%;
+      text-align: center;
+      border-radius: 10px;
+      padding: 50px 50px;
+    }
+
+    h2 {
+      color: #ffffff90;
+      margin-top: 2%;
+    }
+
+    #input-box {
+      margin-top: 5%;
+    }
+
+    #input_box,.input_box{
+        color: #ffffffc3;
+    }
+
+    span {
+      color: #ffffffc3;
+    }
+
+    input {
+      border: none;
+      width: 60%;
+      font-size: 15px;
+      color: #fff;
+      background: transparent;
+      padding: 5px 10px;
+      margin-top: 10px;
+      outline: none;
+
+    }
+    input:hover{
+        border-radius: 8px;
+        outline: 2px solid #ffffffde;
+    }
+
+    button {
+      margin-top: 50px;
+      width: 60%;
+      height: 30px;
+      border-radius: 10px;
+      border: 0;
+      color: #fff;
+      text-align: center;
+      line-height: 30px;
+      font-size: 15px;
+      background-image: linear-gradient(to right, #30cfd0, #330867);
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div id="login_box">
+    <h2>LOGIN</h2>
+    <div id="input_box">
+      账号：<input type="text" name="username" placeholder="请输入用户名">
+    </div>
+    <div class="input_box">
+      密码：<input type="password" name="password" placeholder="请输入密码">
+    </div>
+    <button id="login_btn">登录</button><br>
+  </div>
+</body>
+
+<script type="text/javascript">
+
+  var xhr = new XMLHttpRequest();
+
+  window.onload = function () {
+    document.getElementById("login_btn").onclick = function () {
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            window.location.href = "/web/index.html";
+            // alert(xhr.responseText.s);
+          } else {
+            alert("登陆失败");
+          }
+        }
+      }
+      xhr.open("POST", "/users/login", true);
+      xhr.send();
+    }
+  }
+</script>
+</html>
+

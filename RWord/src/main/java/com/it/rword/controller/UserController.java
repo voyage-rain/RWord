@@ -17,8 +17,17 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/register")
-    public JsonResult<Void> register(User user){
+    public JsonResult<Void> register(User user) {
         userService.register(user);
         return new JsonResult<>(OK);
+    }
+
+    @RequestMapping("/login")
+    public JsonResult<User> login(String username, String password) {
+        User result = userService.login(username, password);
+        if (result == null) {
+            return new JsonResult<>(2);
+        }
+        return new JsonResult<>(OK, result);
     }
 }
