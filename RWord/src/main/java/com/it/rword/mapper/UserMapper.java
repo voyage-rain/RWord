@@ -12,4 +12,11 @@ public interface UserMapper {
      * @return 返回值为用户数据
      */
     User findByUsername(String username);
+
+    /**
+     * 新增用户
+     * @param user 用户数据
+     * @return 返回值为受影响的行数
+     */
+    Integer insert(User user);
 }

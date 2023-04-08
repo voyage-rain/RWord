@@ -17,4 +17,6 @@ public class User extends BasePojo{
 
     private String salt;
 
+    private Integer status;
+
 }
