@@ -30,4 +30,18 @@ public interface UserMapper {
      */
     Integer updateHeadPhotoByUid(Integer uid, String headPhoto, String modifyPeople, Date modifyTime);
 
+    /**
+     * 根据uid修改密码
+     * @param uid 用户id
+     * @param password 密码
+     * @return 返回值为收影响的行数
+     */
+    Integer updatePasswordByUid(Integer uid, String password, String modifyPeople, Date modifyTime);
+
+    /**
+     * 根据uid查询用户信息
+     * @param uid 用户id
+     * @return 返回值为用户数据
+     */
+    User findByUid(Integer uid);
 }

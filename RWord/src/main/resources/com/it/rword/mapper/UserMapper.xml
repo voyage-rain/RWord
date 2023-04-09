@@ -33,4 +33,15 @@
         set head_photo=#{headPhoto}, modify_people=#{modifyPeople}, modify_time=#{modifyTime}
         where uid=#{uid}
     </update>
+
+    <update id="updatePasswordByUid">
+        update user
+        set password=#{password}, modify_people=#{modifyPeople}, modify_time=#{modifyTime}
+        where uid=#{uid}
+    </update>
+
+    <select id="findByUid" resultMap="UserMap">
+        select * from user
+        where uid=#{uid}
+    </select>
 </mapper>

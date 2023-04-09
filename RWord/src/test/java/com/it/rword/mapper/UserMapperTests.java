@@ -29,8 +29,19 @@ public class UserMapperTests {
         }
     }
 
+//    @Test
+//    public void updateHeadPhotoByUid() {
+//        userMapper.updateHeadPhotoByUid(1, "/upload/tom.png", "管理员", new Date());
+//    }
+
     @Test
-    public void updateHeadPhotoByUid() {
-        userMapper.updateHeadPhotoByUid(1, "/upload/tom.png", "管理员", new Date());
+    public void updatePasswordByUid() {
+        userMapper.updatePasswordByUid(2, "abc123", "管理员", new Date());
+    }
+
+    @Test
+    public void findByUid() {
+        User user = userMapper.findByUid(1);
+        System.out.println(user);
     }
 }
