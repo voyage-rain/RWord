@@ -17,8 +17,18 @@ public class UserServiceTests {
     @Test
     public void testRegister(){
         User user = new User();
-        user.setUsername("haha");
+        user.setUsername("ran");
         user.setPassword("123");
         userService.register(user);
+    }
+
+    @Test
+    public void testChangePassword(){
+        userService.changePassword("123","321","ran",3);
+    }
+
+    @Test
+    public void testLogin(){
+        System.out.println(userService.login("ran","321"));
     }
 }

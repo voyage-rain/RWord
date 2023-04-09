@@ -3,6 +3,8 @@ package com.it.rword.mapper;
 import com.it.rword.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
+
 @Mapper
 public interface UserMapper {
 
@@ -19,4 +21,20 @@ public interface UserMapper {
      * @return 返回值为受影响的行数
      */
     Integer insert(User user);
+    /**
+     * 根据uid修改密码
+     * @param uid 用户id
+     * @param password 密码
+     * @return 返回值为收影响的行数
+     */
+
+    Integer updatePasswordByUid(Integer uid, String password, String modifyPeople, Date modifyTime);
+
+    /**
+     * 根据uid查询用户信息
+     * @param uid 用户id
+     * @return 返回值为用户数据
+     */
+    User findByUid(Integer uid);
+
 }
