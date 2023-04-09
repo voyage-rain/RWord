@@ -23,4 +23,15 @@ public interface UserService {
      * @param avatar 上传的头像
      */
     void changeAvatar(String avatar);
+
+
+    /**
+     * 修改密码
+     * @param oldPassword 原密码
+     * @param newPassword 修改后的新密码
+     * @param username 用户名
+     * @param uid 用户id
+     * @return 修改的行数，因为是修改user表的密码所以正确修改的返回值为1
+     */
+    Integer changePassword(String oldPassword, String newPassword, String username, Integer uid);
 }

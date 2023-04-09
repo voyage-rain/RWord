@@ -110,7 +110,61 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * 修改密码
+     *
+     * @param oldPassword 原密码
+     * @param newPassword 修改后的新密码
+     * @param username    用户名
+     * @param uid         用户id
+     * @return 修改的行数，因为是修改user表的密码所以正确修改的返回值为1
+     */
+    @Override
+    public Integer changePassword(String oldPassword, String newPassword, String username, Integer uid) {
 
+        // 通过uid来获取该用户的信息
+        User user = userMapper.findByUid(uid);
+
+        // 判断取得的用户是否是空
+        if(user == null){
+            System.out.println("该用户不存在");
+            return 0;
+        }
+
+        // 判断取得的用户是否是该用户
+        if(!user.getUsername().equals(username)){
+            System.out.println("用户名和用户id不匹配");
+            return -1;
+        }
+
+        // 加密输入的密码
+        // 获取该用户密码的加密盐值
+        String salt = user.getSalt();
+        // 按盐值来加密，加密算法为md5算法
+        String Md5OldPassword = getMD5Password(oldPassword, salt);
+
+        // 获取该用户保存在数据库中的原密码
+        String trueOldPassword = user.getPassword();
+
+        // 匹配输入的原密码和保存在数据库中的密码是否相等
+        if(!trueOldPassword.equals(Md5OldPassword)){
+            System.out.println("用户输入的原密码错误");
+            return -2;
+        }
+
+        // 按用户的盐值对新密码进行加密
+        String Md5NewPassword = getMD5Password(newPassword, salt);
+
+        // 将新修改的密码存入数据库中
+        Integer result = userMapper.updatePasswordByUid(uid, Md5NewPassword, username, new Date());
+
+        if(result != 1){
+            System.out.println("存入新密码发生错误！");
+            return -3;
+        }
+
+        return 1;
+    }
 
     /**
      * 定义一个md5算法的加密处理
