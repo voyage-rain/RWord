@@ -115,6 +115,7 @@ li {
 .box .inbox ul{
     margin: auto;
     margin-left: 50px;
+    text-align: left;
 }
 
 .box .inbox ul li{
@@ -144,3 +145,15 @@ li {
 .revise button a:hover {
     color: rgba(20, 44, 122, 0.671)
 }
+input {
+    border: none;
+    font-size: 15px;
+    width: 130px;
+    color: #fff;
+    background: transparent;
+    outline: none;
+    border-radius: 8px;
+    outline: 2px solid #ffffffde;
+
+}
+

@@ -17,4 +17,10 @@ public interface UserService {
      * @param user 注册的新用户
      */
     void register(User user);
+
+    /**
+     * 修改头像
+     * @param avatar 上传的头像
+     */
+    void changeAvatar(String avatar);
 }
