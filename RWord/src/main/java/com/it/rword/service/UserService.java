@@ -2,6 +2,8 @@ package com.it.rword.service;
 
 import com.it.rword.pojo.User;
 
+import java.util.Date;
+
 public interface UserService {
 
     /**
@@ -18,9 +20,5 @@ public interface UserService {
      */
     void register(User user);
 
-    /**
-     * 修改头像
-     * @param avatar 上传的头像
-     */
-    void changeAvatar(String avatar);
+    void changeHeadPhoto(Integer uid, String headPhoto, String modifyPeople);
 }

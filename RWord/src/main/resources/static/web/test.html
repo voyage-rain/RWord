@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test file</title>
+</head>
+<body>
+<input type="file" name="headFile">
+<input id="btn-change-avatar" type="button" value="上传" />
+</body>
+
+<script type="text/javascript">
+
+    var xhr = new XMLHttpRequest();
+
+    window.onload = function () {
+        document.getElementById("btn-change-avatar").onclick = function () {
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert("上传头像成功");
+                    }
+                }
+            }
+            xhr.open("POST", "/users/login", true);
+
+            // 设置请求头的请求类型，模拟表单数据提交
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // 获取数据
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // 发送请求，携带参数
+            xhr.send("username="+username+"&password="+password);
+        }
+    }
+</script>
+</html>

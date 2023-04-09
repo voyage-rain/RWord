@@ -70,16 +70,6 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 修改头像
-     *
-     * @param avatar 上传的头像
-     */
-    @Override
-    public void changeAvatar(String avatar) {
-
-    }
-
-    /**
      * 用户登录功能
      *
      * @param username 用户名
@@ -110,7 +100,11 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-
+    @Override
+    public void changeHeadPhoto(Integer uid, String headPhoto, String modifyPeople) {
+        // uid和modifiedPeople应从session作用域里获取
+        userMapper.updateHeadPhotoByUid(uid, headPhoto, modifyPeople, new Date());
+    }
 
     /**
      * 定义一个md5算法的加密处理

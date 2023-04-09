@@ -27,4 +27,10 @@
             #{creator}, #{createTime}, #{modifyPeople}, #{modifyTime}
         )
     </insert>
+
+    <update id="updateHeadPhotoByUid">
+        update user
+        set head_photo=#{headPhoto}, modify_people=#{modifyPeople}, modify_time=#{modifyTime}
+        where uid=#{uid}
+    </update>
 </mapper>
