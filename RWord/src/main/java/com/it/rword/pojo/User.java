@@ -24,4 +24,6 @@ public class User extends BasePojo{
      */
     private Integer status;
 
+    private String phone;
+
 }

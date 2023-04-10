@@ -30,6 +30,7 @@ li {
     height: 40px;
     padding-right: 30px;
 }
+
 .headright ul li {
     float: left;
     padding: 0 30px;
@@ -128,7 +129,7 @@ li {
 .box .outbox .information ul li{
     height: 40px;
     width: 280px;
-    padding-top: 10px ;
+    padding-top: 20px ;
     color: rgba(16, 13, 13, 0.742);
 }
 
