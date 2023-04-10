@@ -7,6 +7,8 @@
         <id column="uid" property="uid"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
+        <result column="head_photo" property="headPhoto"/>
+        <result column="salt" property="salt"/>
         <result column="creator" property="creator"/>
         <result column="create_time" property="createTime"/>
         <result column="modify_people" property="modifyPeople"/>
@@ -33,9 +35,14 @@
         where uid=#{uid}
     </update>
 
-    <select id="findByUid" resultMap="UserMap">
-    select * from user
-    where uid=#{uid}
-    </select>
+    <update id="updatePasswordByUid">
+        update user
+        set password=#{password}, modify_people=#{modifyPeople}, modify_time=#{modifyTime}
+        where uid=#{uid}
+    </update>
 
+    <select id="findByUid" resultMap="UserMap">
+        select * from user
+        where uid=#{uid}
+    </select>
 </mapper>

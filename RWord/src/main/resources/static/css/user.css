@@ -51,8 +51,8 @@ li {
 .box {
     margin:auto;
     display: flex;
-    margin-top: 80px;
-    height: 350px;
+    margin-top: 30px;
+    height: 500px;
     width: 600px;
     border-radius: 20px;
     text-align: center;
@@ -77,8 +77,9 @@ li {
 .box .outbox .img_box{
     width: 200px;
     height: 200px;
+    border: 4px solid rgba(243, 243, 79, 0.509);
     border-radius: 100px;
-    margin-top: 50px;
+    margin-top: 30px;
     /* background-color: #777; */
     overflow: hidden;
 }
@@ -88,39 +89,71 @@ li {
 
 }
 
-.box .outbox .button1{
+/* .box .outbox .button1{
     margin-top: 40px;
     background-color: rgba(50, 210, 231, 0);
     border: none;
 
-}
+} */
 
-.box .outbox .button1 a{
+/* .box .outbox .button1 a{
     font-size: 15px;
     font-weight: bolder;
     font-family: 'STKaiti';
     color: rgba(2, 2, 2, 0.909);
-}
+} */
 
-.box .outbox .button1 a:hover{
+/* .box .outbox .button1 a:hover{
     border: 2px solid rgba(50, 210, 231, 0.671);
     border-radius: 8px;
     color: rgba(50, 210, 231, 0.671)
-}
-
-/* .box .inbox{
-    background-color: pink;
 } */
+
+.box .outbox .information{
+    margin-top: 30px;
+    width: 280px;
+    height: 200px;
+    border-radius: 10px;
+    border: 4px solid rgba(243, 243, 79, 0.509);
+}
+.box .outbox .information ul{
+    margin-left: 10px;
+    display: flex;
+    /* 纵向布局 */
+    flex-direction: column;
+    /* 水平居中 */
+    align-items: center;
+    align-content: space-around;
+}
+.box .outbox .information ul li{
+    height: 40px;
+    width: 280px;
+    padding-top: 10px ;
+    color: rgba(16, 13, 13, 0.742);
+}
 
 .box .inbox ul{
     margin: auto;
-    margin-left: 50px;
-    text-align: left;
+    height: 200px;
+    width: 260px;
+    border-radius: 10px;
+    border: 4px solid rgba(243, 243, 79, 0.509);
+    margin-left: 20px;
+    
+}
+.box .inbox .nowbox , .box .inbox .allbox{
+    margin-top: 15px;
 }
 
 .box .inbox ul li{
     color: rgba(16, 13, 13, 0.742);
+    width: 260px;
+    text-align: left;
+    line-height: 20px;
+    margin: 15px;
     margin-top: 20px;
+    height: 20px;
+    font-size: 10px;
 }
 .box .m {
     padding-top: 30px;
@@ -145,15 +178,3 @@ li {
 .revise button a:hover {
     color: rgba(20, 44, 122, 0.671)
 }
-input {
-    border: none;
-    font-size: 15px;
-    width: 130px;
-    color: #fff;
-    background: transparent;
-    outline: none;
-    border-radius: 8px;
-    outline: 2px solid #ffffffde;
-
-}
-

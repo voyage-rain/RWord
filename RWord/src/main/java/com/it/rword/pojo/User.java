@@ -9,7 +9,7 @@ public class User extends BasePojo{
 
     private Integer uid;
 
-    private  String headPhoto;
+    private String headPhoto;
 
     private String username;
 
