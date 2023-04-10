@@ -68,7 +68,7 @@ public class UserController {
      * @return 返回值为void
      */
     @RequestMapping("/change_avatar")
-    public JsonResult<String> changeHeadPhoto(HttpSession session, @RequestParam("file") MultipartFile file) {
+    public JsonResult<String> changeHeadPhoto(HttpSession session, @RequestParam("headFile") MultipartFile file) {
         // 判断文件是否为null
         if (file.isEmpty()) {
             System.out.println("文件为空");
@@ -84,7 +84,7 @@ public class UserController {
         }
 
         // 上传的文件.../upload/文件.png
-        String parent = "G:/JavaTemp/upload";
+        String parent = "G:/JavaTemp/rwordFile";
         System.out.println(parent);
 
         // File对象指向这个路径，File是否存在
@@ -103,23 +103,17 @@ public class UserController {
 
         File dest = new File(dir, filename);    // 是一个空文件
         // 参数file中数据写入到这个空文件中
-//        try {
-//            file.transferTo(dest);    // 将file文件中的数据写入到dest文件中
-//        } catch (FileStateException e) {
-//            throw new FileStateException("文件状态异常");
-//        } catch(IOException e) {
-//            throw new FileUploadIOException("文件读写异常");
-//        }
-
-//        Integer uid = getuidFromSession(session);
-//        String username = getUsernameFromSession(session);
+        try {
+            file.transferTo(dest);    // 将file文件中的数据写入到dest文件中
+        } catch (Exception e) {
+            System.out.println("头像上传失败");
+        }
 
         Integer uid = Integer.valueOf(session.getAttribute("uid").toString());
         String username = session.getAttribute("username").toString();
 
-        // 返回头像的路径/upload/test.png
-        String headPhoto = "/upload/" + filename;
-        System.out.println(headPhoto);
+        // 返回头像的路径/rwordFile/test.png
+        String headPhoto = "/rwordFile/" + filename;
         userService.changeHeadPhoto(uid, headPhoto, username);
 
         return new JsonResult<>(OK, headPhoto);

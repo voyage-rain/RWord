@@ -100,6 +100,9 @@
             // 将json格式的字符串转换为JSON数据
             var jsonObj = JSON.parse(fromJavaServerJsonStr);
             if (jsonObj.state === 200) {
+              // 将头像文件保存到客户端
+              localStorage.setItem("headPhoto", jsonObj.data.headPhoto);
+              // 登录成功，跳转到首页
               window.location.href = "/web/index.html";
             }else {
               alert("登陆失败");

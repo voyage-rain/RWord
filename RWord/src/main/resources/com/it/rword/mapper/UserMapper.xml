@@ -7,6 +7,8 @@
         <id column="uid" property="uid"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
+        <result column="head_photo" property="headPhoto"/>
+        <result column="salt" property="salt"/>
         <result column="creator" property="creator"/>
         <result column="create_time" property="createTime"/>
         <result column="modify_people" property="modifyPeople"/>
