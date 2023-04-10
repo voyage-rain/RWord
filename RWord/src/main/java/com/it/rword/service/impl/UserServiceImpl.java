@@ -155,10 +155,26 @@ public class UserServiceImpl implements UserService {
 
         return 1;
     }
+
     @Override
     public void changeHeadPhoto(Integer uid, String headPhoto, String modifyPeople) {
         // uid和modifiedPeople应从session作用域里获取
         userMapper.updateHeadPhotoByUid(uid, headPhoto, modifyPeople, new Date());
+    }
+
+    @Override
+    public User userInfo(Integer uid) {
+        User user = userMapper.findByUid(uid);
+        if (user == null) {
+            System.out.println("用户信息不存在！");
+            return null;
+        }
+        user.setSalt(null);
+        user.setCreator(null);
+        user.setCreateTime(null);
+        user.setModifyPeople(null);
+        user.setModifyTime(null);
+        return user;
     }
 
     /**

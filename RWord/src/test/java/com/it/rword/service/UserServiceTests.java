@@ -1,6 +1,5 @@
 package com.it.rword.service;
 
-import com.it.rword.mapper.UserMapper;
 import com.it.rword.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,5 +29,10 @@ public class UserServiceTests {
     @Test
     public void testLogin(){
         System.out.println(userService.login("ran","321"));
+    }
+
+    @Test
+    public void userInfo() {
+        System.out.println(userService.userInfo(3));
     }
 }

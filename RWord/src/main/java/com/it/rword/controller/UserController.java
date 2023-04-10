@@ -143,4 +143,11 @@ public class UserController {
 
         return new JsonResult<>(OK, headPhoto);
     }
+
+    @RequestMapping("/info")
+    public JsonResult<User> userInfo(HttpSession session) {
+        Integer uid = Integer.valueOf(session.getAttribute("uid").toString());
+        User data = userService.userInfo(uid);
+        return new JsonResult<>(OK, data);
+    }
 }

@@ -37,4 +37,6 @@ public interface UserService {
      * @return 修改的行数，因为是修改user表的密码所以正确修改的返回值为1
      */
     Integer changePassword(String oldPassword, String newPassword, String username, Integer uid);
+
+    User userInfo(Integer uid);
 }
