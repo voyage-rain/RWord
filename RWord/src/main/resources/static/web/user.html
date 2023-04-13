@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="user.css">
+    <link rel="stylesheet" href="../css/user.css">
     <title>user</title>
     
 </head>
 <body>
-    
     <div class="head">
     <div class="headleft">个人主页</div>
     <div class="headright">
@@ -22,15 +21,14 @@
     <div class="box">
         <div class="outbox">
              <div class="img_box">
-                <img src="img/user.jpg">
+                <img id="headPhoto" src="../img/user.jpg">
              </div>
              <!-- <button class="button1"><a href="#">上传头像</a></button> -->
              <div class="information">
                 <ul>
-                    <li>编号：00000000000000001</li>
-                    <li>用户名：mumu</li>
-                    <li>手机号：1234562222</li>
-                    <li>密码：123456</li>
+                    <li>编号：<span id="uid">00000000000000001</span></li>
+                    <li>用户名：<span id="username">mumu</span></li>
+                    <li>手机号：<span id="phone">1234562222</span></li>
                 </ul>
              </div>
             
@@ -39,7 +37,6 @@
             <div class="nowbox">
                 <h4>今日成就</h4>
                 <ul>
-                    
                     <li>今日在线时长：</li>
                     <li>今日阅读书籍数量：</li>
                     <li>今日背的单词个数：</li>
@@ -62,4 +59,43 @@
         </button>
     </div>
 </body>
+
+<script type="text/javascript">
+    window.onload = function () {
+        // 获取客户端保存的头像文件路径
+        var item = localStorage.getItem("headPhoto");
+        var img = document.getElementById("headPhoto");
+        // 将数据设置到img标签的src属性上
+        img.src = item;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function (){
+            if(xhr.readyState === 4){
+                if(xhr.status === 200) {
+
+                    var userJsonStr = this.responseText;
+
+                    var jsonUser = JSON.parse(userJsonStr);
+
+
+                    var infoUid = document.getElementById("uid");
+                    infoUid.innerText = jsonUser.data.uid;
+
+                    var infoUserName = document.getElementById("username");
+                    infoUserName.innerText = jsonUser.data.username;
+
+                    var infoPhone = document.getElementById("phone");
+                    infoPhone.innerText = jsonUser.data.phone;
+
+                    var infoPassword = document.getElementById("password");
+                    infoPassword.innerText = jsonUser.data.password;
+                }
+            }
+        }
+        xhr.open("GET", "/users/info", true);
+        xhr.send();
+
+    }
+</script>
 </html>

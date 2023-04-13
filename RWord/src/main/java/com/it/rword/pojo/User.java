@@ -24,6 +24,8 @@ public class User extends BasePojo{
      */
     private Integer status;
 
+    private String phone;
+
     // 用户总记单词量
     private Integer total;
 
