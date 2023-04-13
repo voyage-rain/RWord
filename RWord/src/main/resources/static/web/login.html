@@ -30,10 +30,26 @@
 
     #input-box {
       margin-top: 5%;
+
     }
 
     #input_box,.input_box{
         color: #ffffffc3;
+    }
+
+    .a_box{
+        margin-top: 8%;
+        margin-left: 75%;
+        font-size: 5px;
+    }
+
+    a{
+        text-decoration: none;
+        color: #ffffffc3;
+    }
+
+    a:hover{
+        color: #1570e7cc;
     }
 
     span {
@@ -57,7 +73,7 @@
     }
 
     button {
-      margin-top: 50px;
+      margin-top: 20px;
       width: 60%;
       height: 30px;
       border-radius: 10px;
@@ -77,52 +93,16 @@
   <div id="login_box">
     <h2>LOGIN</h2>
     <div id="input_box">
-      账号：<input type="text" id="username" placeholder="请输入用户名">
+      账号：<input type="text" placeholder="请输入用户名">
     </div>
     <div class="input_box">
-      密码：<input type="password" id="password" placeholder="请输入密码">
+      密码：<input type="password" placeholder="请输入密码">
     </div>
-    <button id="login_btn">登录</button><br>
+    <div class="a_box">
+        <a href="#">忘记密码?</a>
+    </div>
+    <button>登录</button><br>
   </div>
 </body>
-
-<script type="text/javascript">
-
-  var xhr = new XMLHttpRequest();
-
-  window.onload = function () {
-    document.getElementById("login_btn").onclick = function () {
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            // 接收到后端返回的json格式的字符串
-            var fromJavaServerJsonStr = this.responseText;
-            // 将json格式的字符串转换为JSON数据
-            var jsonObj = JSON.parse(fromJavaServerJsonStr);
-            if (jsonObj.state === 200) {
-              // 将头像文件保存到客户端
-              localStorage.setItem("headPhoto", jsonObj.data.headPhoto);
-              // 登录成功，跳转到首页
-              window.location.href = "/web/index.html";
-            }else {
-              alert("登陆失败");
-            }
-          }
-        }
-      }
-      xhr.open("POST", "/users/login", true);
-
-      // 设置请求头的请求类型，模拟表单数据提交
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-      // 获取数据
-      var username = document.getElementById("username").value;
-      var password = document.getElementById("password").value;
-
-      // 发送请求，携带参数
-      xhr.send("username="+username+"&password="+password);
-    }
-  }
-</script>
 </html>
 

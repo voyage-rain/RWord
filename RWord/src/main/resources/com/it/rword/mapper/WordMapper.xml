@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.rword.mapper.WordMapper">
+    <select id="findEnd" resultType="Integer">
+        select end_wid from book where bid=#{bid}
+    </select>
+
+    <select id="findOnce" resultType="com.it.rword.pojo.Word">
+        select * from word limit #{wid}, #{count}
+    </select>
+
+    <select id="findLastEnd" resultType="Integer">
+        select `end` from `read` where uid = #{uid} and bid = #{bid}
+    </select>
+
+    <select id="findLastStart" resultType="Integer">
+        select start from `read` where uid=#{uid} and bid=#{bid}
+    </select>
+
+    <select id="currentDate" resultType="Date">
+        select date from `read` where uid=#{uid} and bid=#{bid}
+    </select>
+
+    <update id="record">
+        update `read`
+        set start=#{start}, end=#{end}, modify_user=#{modifyUser}, modify_time=#{modifyTime}
+        where uid=#{uid} and bid=#{bid}
+    </update>
+
+    <update id="wordTotal">
+        update user
+        set total = total + #{count}
+        where uid = #{uid}
+    </update>
+</mapper>

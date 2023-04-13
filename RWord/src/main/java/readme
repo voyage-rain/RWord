@@ -1,0 +1,50 @@
+1. 结束背诵：
+    前端：添加结束按钮
+    后端：结束背诵后，记录当前背诵的单词位置，在read表中end字段记录
+2. 单词获取
+    后端：每次取100个单词，存在Java程序中的ArrayList集合里，并将数据传递给前端，JS遍历集合
+3. mapper层
+    (1) 查询 一次查询100个单词
+    // 这里的wid即为记录的end位置,也是此次查询的起始位置
+    List<String> findOnce(Integer wid): select * from word where (wid+100) < ? limit wid, 100;(已修改)
+
+    // 查询 一次查询100个单词
+    // 如再接着查100个单词未超出该书单词区间：
+    List<String> findOnceLimit(Integer wid): select * from word limit wid, 100;
+
+    // 如再接着查100个单词超出该书单词区间：
+    List<String> findOnceOver(Integer wid, Integer count): select * from word limit wid, count;
+
+    // 将上述两个查询合并
+
+    (2) 更新 记录用户结束时背到的单词位置
+    // start即为上一次的end，如果此时更新时date和当前日期相同，则不更新start
+    Date currentDate(Integer uid, Integer bid): select date from read where uid = ?, bid = ?;
+
+    // end 和 start 均为wid
+    void record(Integer start, Integer end, Integer bid, Integer uid):
+    update read set start = ?, end = ? where uid = ? and bid = ?;
+
+    // 查询 查询end作为此次背诵的start
+    // 返回值为wid (注意end和read都是关键字，加着重号)
+    Integer findStart(Integer uid, Integer bid): select end from read where uid = ? and bid = ?;
+    // 查询 查询上一次背书的起始位置和末位置
+    Integer findLastStart(Integer uid, Integer bid);
+    Integer findLastEnd(Integer uid, Integer bid): select end from read where uid = ? and bid = ?;
+
+    // 更新 记录用户总背单词数 （只有当当前的date和之前表中记录的date不一致时，才执行该操作）
+    // count为read表中end-start的值
+    Integer wordTotal(Integer uid, Integer count): update user set total = total + count;
+
+    // 查询 查询该书单词的在word表中的区间
+    void findEnd(Integer bid): select end_wid from book where bid = ?;
+
+service层：
+判断100个单词是否超出限制：wid+100是否大于end
+
+优化：对read表的查询（未完成）
+
+补：
+用户将书籍加入书架之后：
+mapper层：
+    (1) 更新 向read表中插入一条数据：将该用户的该本书阅读起始位置和末位置均设为这本书在word中的wid

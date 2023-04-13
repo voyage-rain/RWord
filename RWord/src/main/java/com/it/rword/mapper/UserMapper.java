@@ -1,9 +1,11 @@
 package com.it.rword.mapper;
 
 import com.it.rword.pojo.User;
+import com.it.rword.pojo.Word;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
