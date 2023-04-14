@@ -16,7 +16,7 @@ public class WordServiceImpl implements WordService {
     @Resource
     private WordMapper wordMapper;
 
-    private final static Integer num = 100;
+    private final static Integer num = 2;
     /**
      * 从数据库表中查询一定数量的单词，放入后端的缓存中
      *
@@ -29,6 +29,9 @@ public class WordServiceImpl implements WordService {
         // 根据用户id查询该用户背单词的起始位置
         Integer start = wordMapper.findLastEnd(uid, bid);
 
+        System.out.println(bid);
+        System.out.println(uid);
+        System.out.println(start);
         if (start == null) {
             System.out.println("用户没有将该书添加到书架");
             return null;
@@ -36,6 +39,8 @@ public class WordServiceImpl implements WordService {
 
         // 根据bid查询该书单词的末位置
         Integer end = wordMapper.findEnd(bid);
+
+        System.out.println("end"+end);
 
         // 默认一次性从数据库查询100个单词作为缓存的单词列表
         // 判断从当前位置加上100个单词后是否超出该书的单词区间

@@ -11,11 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/users")

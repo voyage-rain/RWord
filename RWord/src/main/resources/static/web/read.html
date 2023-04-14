@@ -10,6 +10,7 @@
         <!-- 引入jquery -->
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <title>Read</title>
+
     </head>
     <body>
         <!-- 最外层的大盒子 -->
@@ -25,18 +26,18 @@
         <!-- 注册盒子 -->
         <div class="register-form">
             <!-- 标题盒子 -->
-            <div class="title-box1" >   
+            <div class="title-box1" id="word">
                 <!-- data-max-width="300" -->
                 div
             </div>
             <!-- 输入框盒子 -->
             <div class="input-box">
-                <div>音标：aaaaa</div>
-                <div>词义：aaaaa</div>
+                <div >音标：<strong id="pronunciation">aaaaa</strong></div>
+                <div >词义：<strong id="meaning">aaaaa</strong></div>
             </div>
             <!-- 按钮盒子 -->
             <div class="btn-box">
-                <button>下一个</button>
+                <button id="next1">下一个</button>
                 <!-- 绑定点击事件 -->
                 <button onclick="mySwitch()">练习</button>
             </div>
@@ -50,18 +51,18 @@
             <!-- 输入框盒子 -->
             <div class="input-box">
                 <div>单词：<input type="text"></div>
-                <div>词义：</div>
+                <div>词义：<strong id="meaning1"></strong></div>
             </div>
             <!-- 按钮盒子 -->
             <div class="btn-box">
                 <button>检查</button>
                 <!-- 绑定点击事件 -->
                 <button onclick="mySwitch()">继续背</button>
-                <button>下一个</button>
+                <button id="next2">下一个</button>
             </div>
         </div>
        </div>
-       <script>
+       <script type="text/javascript">
             // 滑动的状态
              let flag=false
              const mySwitch=()=>{
@@ -82,7 +83,7 @@
                 flag=!flag
              }
        </script>
-       <script>
+       <script type="text/javascript">
             const bubleCreate=()=>{
                 // 获取body元素
                 const body = document.body
@@ -106,6 +107,67 @@
             setInterval(() => {
                 bubleCreate()
             }, 200);
+
+
         </script>
+    <script type="text/javascript">
+
+        var xhr = new XMLHttpRequest();
+        window.onload = function () {
+            var x = 0;
+            var i;
+            var wordsJsonStr;
+            var jsonWord;
+            var wordStr;
+            var obj;
+            let wids = new Array();
+            let words = new Array();
+            let meanings = new Array();
+            let pronunciations = new Array();
+
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState === 4){
+                    if(xhr.status === 200){
+
+                        wordsJsonStr = this.responseText;
+                        jsonWord = JSON.parse(wordsJsonStr);
+                        wordStr = jsonWord.data;
+                        obj = eval(wordStr);
+                        for(i in obj)
+                        {
+                            wids[i] = obj[i].wid;
+                            words[i] = obj[i].word;
+                            meanings[i] = obj[i].meaning;
+                            pronunciations[i] = obj[i].pronunciation;
+                            console.log(words[i]);
+                        }
+                            myFunction();
+                    }
+                }
+            }
+
+            xhr.open("get", "/words/start", true);
+
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("bid=1");
+
+            document.getElementById("next1").onclick = myFunction;
+            document.getElementById("next2").onclick = myFunction;
+            function myFunction(){
+                if(x <= i) {
+                    document.getElementById("word").innerText = words[x];
+                    console.log(words[x]);
+                    document.getElementById("meaning").innerText = meanings[x];
+                    document.getElementById("meaning1").innerText = meanings[x];
+                    document.getElementById("pronunciation").innerText = pronunciations[x];
+                    x+=1;
+                }else {
+                    alert("您今天已经背了100个单词了，需要休息一下吗？")
+                }
+
+            }
+        }
+    </script>
+
     </body>
 </html>
