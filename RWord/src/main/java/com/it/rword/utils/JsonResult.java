@@ -1,4 +1,4 @@
-package com.it.rword.util;
+package com.it.rword.utils;
 
 import lombok.Data;
 

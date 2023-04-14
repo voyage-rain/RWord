@@ -1,9 +1,22 @@
-#server:
-#  port: 80
+server:
+  port: 80
 spring:
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/remember_words?useUnicode=true;characterEncoding=utf8
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
-      password: zzzzzzzzz10@,
+      password: abc123
+  redis:
+    host: localhost
+    port: 8603
+    client-type: jedis
+    password: abc123
+
+  cache:
+    type: redis
+    redis:
+        use-key-prefix: true
+        cache-null-values: false
+        key-prefix: sms_
+        time-to-live: 120s

@@ -1,10 +1,18 @@
 package com.it.rword.service.impl;
 
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
 import com.it.rword.mapper.UserMapper;
 import com.it.rword.pojo.User;
 import com.it.rword.service.UserService;
+import com.it.rword.utils.CodeUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -15,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private CodeUtil codeUtil;
 
     /**
      * 用户注册功能
@@ -175,6 +186,72 @@ public class UserServiceImpl implements UserService {
         user.setModifyPeople(null);
         user.setModifyTime(null);
         return user;
+    }
+
+    @Override
+    @CachePut(value = "smsCode", key = "#phone")
+    public String smsCode(String phone) {
+        // 设置参数
+        int appId = 1400796698;
+        String appKey = "cee3f7475248bfb778eba7e28e1439c1";
+        int templateId = 1706934;
+        String smsSign = "落叶几分秋公众号";
+
+        // 生成随机的验证码
+        String generator = codeUtil.generator(phone);
+
+        String dest = "108";
+        String min = "2";
+
+        try{
+            // 设置参数
+            String[] params = {generator, dest, min};
+            SmsSingleSender sender = new SmsSingleSender(appId, appKey);
+//            SmsSingleSenderResult result = sender.sendWithParam("86", phone, templateId, params, smsSign, "", "");
+            sender.sendWithParam("86", phone, templateId, params, smsSign, "", "");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 需要有返回值
+        return generator;
+    }
+
+    /**
+     * 忘记密码，通过电话号码修改密码word
+
+     * @param smsCodeConfirm  确认验证码
+     * @param newPassword     新密码Password
+     * @param confirmPassword 确认新密码
+     * @param phone 电话号码
+     */
+    @Override
+    public void forgetPassword(String smsCodeConfirm, String newPassword, String confirmPassword, String phone) {
+        User user = userMapper.findByPhone(phone);
+        if (user == null) {
+            System.out.println("用户数据不存在");
+            return;
+        }
+        // 从内存中的取出验证码
+        String cacheCode = codeUtil.get(phone);
+        if (cacheCode == null) {
+            // 验证码过期
+            System.out.println("请重新获取验证码");
+            return;
+        } else if (!smsCodeConfirm.equals(cacheCode)) {
+            // 将从内存中取出的验证码与传递过来的验证码比对
+            System.out.println("验证码输入错误");
+            return;
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            System.out.println("密码确认错误");
+            return;
+        }
+        String salt = user.getSalt();
+        String Md5OldPassword = getMD5Password(newPassword, salt);
+        Integer rows = userMapper.updatePasswordByPhone(phone, Md5OldPassword, phone, new Date());
+        if (rows != 1) {
+            System.out.println("密码设置失败");
+        }
     }
 
     /**

@@ -35,4 +35,14 @@ public class UserServiceTests {
     public void userInfo() {
         System.out.println(userService.userInfo(3));
     }
+
+    @Test
+    public void smsCode() {
+        userService.smsCode("15883031651");
+    }
+
+    @Test
+    public void forgetPassword() {
+//        userService.forgetPassword("123", "123", "123456", "123456", "15883031651");
+    }
 }

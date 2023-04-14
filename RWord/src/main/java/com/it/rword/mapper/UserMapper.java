@@ -36,7 +36,7 @@ public interface UserMapper {
      * 根据uid修改密码
      * @param uid 用户id
      * @param password 密码
-     * @return 返回值为收影响的行数
+     * @return 返回值为受影响的行数
      */
     Integer updatePasswordByUid(Integer uid, String password, String modifyPeople, Date modifyTime);
 
@@ -46,4 +46,21 @@ public interface UserMapper {
      * @return 返回值为用户数据
      */
     User findByUid(Integer uid);
+
+    /**
+     * 根据用户phone修改密码
+     * @param phone 电话号码
+     * @param password 新密码
+     * @param modifyPeople 修改者
+     * @param modifyTime 修改时间
+     * @return 返回值为受影响的行数
+     */
+    Integer updatePasswordByPhone(String phone, String password, String modifyPeople, Date modifyTime);
+
+    /**
+     * 通过电话号码查询用户信息
+     * @param phone 电话号码
+     * @return 返回值为用户数据
+     */
+    User findByPhone(String phone);
 }

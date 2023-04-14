@@ -2,7 +2,7 @@ package com.it.rword.controller;
 
 import com.it.rword.pojo.User;
 import com.it.rword.service.UserService;
-import com.it.rword.util.JsonResult;
+import com.it.rword.utils.JsonResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/users")
@@ -149,5 +147,17 @@ public class UserController {
         Integer uid = Integer.valueOf(session.getAttribute("uid").toString());
         User data = userService.userInfo(uid);
         return new JsonResult<>(OK, data);
+    }
+
+    @RequestMapping("/sms")
+    public JsonResult<Void> smsCode(String phone) {
+        userService.smsCode(phone);
+        return new JsonResult<>(OK);
+    }
+
+    @RequestMapping("/check")
+    public JsonResult<Void> check(String smsCodeConfirm, String newPassword, String confirmPassword, String phone) {
+        userService.forgetPassword(smsCodeConfirm, newPassword, confirmPassword, phone);
+        return new JsonResult<>(OK);
     }
 }

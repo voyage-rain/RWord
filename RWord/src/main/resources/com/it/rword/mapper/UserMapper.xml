@@ -46,4 +46,15 @@
         select * from user
         where uid=#{uid}
     </select>
+
+    <update id="updatePasswordByPhone">
+        update user
+        set password=#{password}, modify_people=#{modifyPeople}, modify_time=#{modifyTime}
+        where phone=#{phone}
+    </update>
+
+    <select id="findByPhone" resultMap="UserMap">
+        select * from user
+        where phone=#{phone}
+    </select>
 </mapper>

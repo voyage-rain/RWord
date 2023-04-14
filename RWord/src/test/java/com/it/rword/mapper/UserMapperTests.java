@@ -46,4 +46,9 @@ public class UserMapperTests {
         User user = userMapper.findByUid(1);
         System.out.println(user);
     }
+
+    @Test
+    public void updatePasswordByPhone() {
+        userMapper.updatePasswordByPhone("15883031651", "123456", "15883031651", new Date());
+    }
 }
